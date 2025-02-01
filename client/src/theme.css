@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --color-text: var(--ui-text);
+  --color-text-foreground: var(--ui-text-foreground);
+  --color-background: var(--ui-background);
+  --color-foreground: var(--ui-foreground);
+  --color-border: var(--ui-border);
+  --color-footer: var(--ui-footer);
+  --color-highlight: var(--ui-highlight);
+  --color-lowlight: var(--ui-lowlight);
+  --color-gradient: var(--ui-gradient);
+}
+
 :root {
   line-height: 1.5;
   font-weight: 400;
