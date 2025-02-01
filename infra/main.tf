@@ -81,3 +81,38 @@ resource "aws_route_table_association" "private_assoc" {
   route_table_id = aws_route_table.private_rt.id
 }
 
+# criando security group
+resource "aws_security_group" "rds_sg" {
+  name_prefix = "rds-"
+
+  vpc_id = aws_vpc.vpc-prod-sa-east-1-autonome.id
+
+  # Add any additional ingress/egress rules as needed
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+## criando um rds com postgres
+resource "aws_db_instance" "rds" {
+  allocated_storage    = 20
+  engine               = "postgres"
+  storage_type = "gp2"
+  engine_version       = "11.5"
+  instance_class       = "db.t2.micro"
+  username             = "myuser"
+  password             = process.env.DB_PASSWORD
+  skip_final_snapshot  = true
+}
+
+# criando um grupo de subnet para o rds
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name = "db-subnet-group"
+  subnet_ids = [aws_subnet.prod-private_subnet-sa-east-1.id]
+
+  tags = {
+    Name = " DB Subnet Group"
+  }
+}
