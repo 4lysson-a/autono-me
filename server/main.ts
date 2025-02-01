@@ -18,10 +18,14 @@ router.get("/api/dinosaurs/:dinosaur", (context) => {
     context.response.body = "No dinosaur name provided.";
   }
 
-  const dinosaur = data.find((item) =>
-    item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+  const dinosaur = data.find(
+    (item) => item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
   );
 
   context.response.body = dinosaur ?? "No dinosaur found.";
 });
 
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+await app.listen({ port: 8000 });
