@@ -1,0 +1,11 @@
+import "./theme.css";
+
+import { StrictMode } from "react";
+import { Router } from "./router.tsx";
+import { createRoot } from "react-dom/client";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <Router />
+  </StrictMode>
+);
