@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: autonome-db
+    environment:
+      POSTGRES_USER: autonome
+      POSTGRES_PASSWORD: autonome
+      POSTGRES_DB: autonome
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
