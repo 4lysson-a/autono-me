@@ -8,7 +8,7 @@ import {
   handleGetTransactionsById,
   handleUpdateTransaction,
 } from "./controllers/transaction.js";
-import { handleCreateTestUser } from "./controllers/user.js";
+import { handleCreateUser, handleDeleteUser, handleGetUserById, handleGetUsers, handleUpdateUser } from "./controllers/user.js";
 
 const app = express();
 const port = 8000;
@@ -29,9 +29,12 @@ app.get("/transactions/:id", handleGetTransactionsById);
 app.post("/transactions", handleCreateTransaction);
 app.put("/transactions/:id", handleUpdateTransaction);
 app.delete("/transactions/:id", handleDeleteTransaction);
-
-app.post("/users", handleCreateTestUser);
-
+// rota para criar usuários
+app.post("/users", handleCreateUser);
+app.get("/users", handleGetUsers);
+app.put("/users/:id", handleUpdateUser);
+app.delete("/users/:id", handleDeleteUser);
+app.get("/users/:id", handleGetUserById);
 // Inicializa o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
