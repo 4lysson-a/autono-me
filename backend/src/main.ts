@@ -1,8 +1,11 @@
-import { Application } from "jsr:@oak/oak/application";
-import router from "./routes.ts";
+import type { Response } from "express"
 
-const app = new Application();
-app.use(router.routes());
-app.use(router.allowedMethods());
+const express = require('express')
+const app = express()
+const port = 3000
 
-app.listen({ port: 8080 });
+app
+  .get('/', handleGet)
+
+app.
+  listen(port, () => console.log(`Example app listening on port ${port}`))
