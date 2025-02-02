@@ -1,7 +1,7 @@
 export const Home = () => {
   return (
     <main>
-      <h1 className="bg-highlight">oi</h1>
+      <h1 className="bg-ui-background">oi</h1>
     </main>
   );
 }
