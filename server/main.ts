@@ -9,6 +9,7 @@ import {
   handleUpdateTransaction,
 } from "./controllers/transaction.js";
 import { handleCreateUser, handleDeleteUser, handleGetUserById, handleGetUsers, handleUpdateUser } from "./controllers/user.js";
+import { handleCreateBusiness, handleDeleteBusiness, handleGetBusiness, handleGetBusinessById, handleUpdateBusiness } from "./controllers/business.js";
 
 const app = express();
 const port = 8000;
@@ -35,6 +36,14 @@ app.get("/users", handleGetUsers);
 app.put("/users/:id", handleUpdateUser);
 app.delete("/users/:id", handleDeleteUser);
 app.get("/users/:id", handleGetUserById);
+
+// rotas para business
+app.get("/business", handleGetBusiness);
+app.get("/business/:id", handleGetBusinessById);
+app.post("/business", handleCreateBusiness);
+app.put("/business/:id", handleUpdateBusiness);
+app.delete("/business/:id", handleDeleteBusiness);
+
 // Inicializa o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
