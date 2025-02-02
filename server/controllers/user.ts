@@ -2,17 +2,6 @@ import type { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { prisma } from "../prisma";
 
-export const handleCreateTestUser = async (req: Request, res: Response) => {
-  await prisma.user.create({
-    data: {
-      id: uuidv4(),
-      email: "teste@example.com",
-      name: "Usuário Teste",
-      password: "senha123",
-    },
-  });
-};
-
 export const handleCreateUser = async (req: Request, res: Response) => {
   const { email, name, password } = req.body;
 
@@ -42,9 +31,9 @@ export const handleGetUserById = async (req: Request, res: Response) => {
     },
   });
 
-  if (!user) {
-    return res.status(404).json({ error: "Usuário não encontrado" });
-  }
+  // if (!user) {
+  //   return res.status(404).json({ error: "Usuário não encontrado" });
+  // }
 
   res.json(user);
 };
@@ -78,3 +67,4 @@ export const handleDeleteUser = async (req: Request, res: Response) => {
 
   res.json({ message: "Usuário deletado com sucesso" });
 };
+
