@@ -1,7 +1,7 @@
 export const Home = () => {
   return (
-    <main>
-      <h1 className="bg-ui-background">home da dashboard</h1>
+    <main className="">
+      <h1 className="bg-ui-background">home da dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard dashboard</h1>
     </main>
   );
-}
+};

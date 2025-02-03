@@ -6,7 +6,7 @@ type Provider = {
 
 export const Private = ({ children }: Provider) => {
   const isAuthenticated = true;
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/" />;
 };
 
 export const PrivateProvider: React.FC<Provider> = ({ children }) => {

@@ -8,12 +8,17 @@ export const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <PrivateProvider>
-          <Route path="/dash" element={<Dash.Layout />}>
-            <Route path="home" element={<Dash.Home />} />
-          </Route>
-        </PrivateProvider>
+        <Route
+          path="/dash"
+          element={
+            <PrivateProvider>
+              <Dash.Layout />
+            </PrivateProvider>
+          }
+        >
+          <Route index path="" element={<Dash.Home />} />
+        </Route>
       </Routes>
-    </BrowserRouter >
+    </BrowserRouter>
   );
 };
