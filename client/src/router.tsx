@@ -2,7 +2,7 @@ import { Dash, Home } from "./pages";
 import { PrivateProvider } from "./context/private";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-export const Router = () => {
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -22,3 +22,5 @@ export const Router = () => {
     </BrowserRouter>
   );
 };
+
+export default Router;
