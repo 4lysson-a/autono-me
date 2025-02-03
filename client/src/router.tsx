@@ -1,5 +1,6 @@
-import { BrowserRouter, Route, Routes } from "react-router";
 import { Dash, Home } from "./pages";
+import { PrivateProvider } from "./context/private";
+import { BrowserRouter, Route, Routes } from "react-router";
 
 export const Router = () => {
   return (
@@ -7,10 +8,12 @@ export const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="/dash" element={<Dash.Layout />}>
-          <Route path="home" element={<Dash.Home />} />
-        </Route>
+        <PrivateProvider>
+          <Route path="/dash" element={<Dash.Layout />}>
+            <Route path="home" element={<Dash.Home />} />
+          </Route>
+        </PrivateProvider>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 };
