@@ -17,6 +17,7 @@ const Router = () => {
           }
         >
           <Route index path="" element={<Dash.Home />} />
+          <Route path="transactions" element={<Dash.Transactions />} />
         </Route>
       </Routes>
     </BrowserRouter>

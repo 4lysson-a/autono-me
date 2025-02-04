@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { TransactionList } from "./transaction-list";
 import { ArrowDown as Arrow } from "lucide-react";
 
 type ITransaction = {
@@ -90,9 +91,7 @@ export const RecentTransactions = () => {
         <Shadow />
       </ul>
 
-      <button className="text-ui-text bg-ui-border rounded-lg text-sm xs:text-md font-bold p-3">
-        Ver todas as transações
-      </button>
+      <TransactionList />
     </div>
   );
 };

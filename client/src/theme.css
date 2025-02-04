@@ -49,6 +49,11 @@
   }
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border) var(--ui-background);
+}
+
 a {
   text-decoration: inherit;
 }
