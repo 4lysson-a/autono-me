@@ -90,7 +90,7 @@ export const RecentTransactions = () => {
         <Shadow />
       </ul>
 
-      <button className="text-ui-text bg-ui-border text-sm xs:text-md font-bold">
+      <button className="text-ui-text bg-ui-border rounded-lg text-sm xs:text-md font-bold p-3">
         Ver todas as transações
       </button>
     </div>
