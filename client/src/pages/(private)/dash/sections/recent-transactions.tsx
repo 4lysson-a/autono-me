@@ -51,10 +51,10 @@ const mockData = [
 
 export const RecentTransactions = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <h3>Recent Transactions</h3>
-
+    <div className="flex flex-col gap-6">
       <ul className="flex flex-col gap-4">
+        <h3>Recent Transactions</h3>
+
         {mockData.map((data) => (
           <Transaction
             date={data.date}
