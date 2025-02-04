@@ -15,6 +15,9 @@ export default {
         "ui-lowlight": "var(--ui-lowlight)",
         "ui-gradient": "var(--ui-gradient)",
       },
+      screens: {
+        'xs': '330px',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
