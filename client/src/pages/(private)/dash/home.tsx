@@ -4,7 +4,7 @@ import { FinancialInsights } from "./sections/financial-insights";
 
 export const Home = () => {
   return (
-    <div>
+    <div className="pb-[50px]">
       <header className="flex p-4 py-6">
         <h1 className="text-center w-full font-bold text-lg">Olá, João</h1>
         <Search className="place-items-end" />

@@ -24,7 +24,11 @@
   --ui-footer: #ffffff;
   --ui-highlight: #0ad95c;
   --ui-lowlight: #d9220a;
-  --ui-gradient: #ffffff;
+  --ui-gradient: linear-gradient(
+    180deg,
+    #f0f2f5 -0.68%,
+    rgba(240, 242, 245, 0) 66.08%
+  );
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,7 +41,11 @@
     --ui-footer: #1c2126;
     --ui-highlight: #0ad95c;
     --ui-lowlight: #d9220a;
-    --ui-gradient: #ffffff;
+    --ui-gradient: linear-gradient(
+      180deg,
+      #293038 -0.68%,
+      rgba(41, 48, 56, 0) 66.08%
+    );
   }
 }
 
@@ -77,7 +85,6 @@ body {
     padding-bottom: 100px;
   }
 }
-
 
 @layer base {
   :root {
@@ -132,5 +139,5 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-2: 340 75% 55%;
-    }
+  }
 }

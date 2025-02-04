@@ -60,10 +60,22 @@ const mockData: ITransaction[] = [
   },
 ];
 
+const Shadow = () => {
+  return (
+    <div
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--ui-background) 100%)",
+      }}
+      className="w-full h-[100px] absolute bottom-0 left-0"
+    />
+  );
+};
+
 export const RecentTransactions = () => {
   return (
     <div className="flex flex-col gap-6">
-      <ul className="flex flex-col gap-4">
+      <ul className="flex flex-col gap-4 relative">
         <h3 className="text-lg font-bold">Recent Transactions</h3>
 
         {mockData.map((data) => (
@@ -75,6 +87,7 @@ export const RecentTransactions = () => {
             amount={data.amount}
           />
         ))}
+        <Shadow />
       </ul>
 
       <button className="text-ui-text bg-ui-border text-sm xs:text-md font-bold">
