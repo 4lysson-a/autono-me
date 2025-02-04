@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { RecentTransactions } from "./sections/recent-transactions";
+import { FinancialInsights } from "./sections/financial-insights";
 
 export const Home = () => {
   return (
@@ -10,7 +11,7 @@ export const Home = () => {
       </header>
 
       <main className="p-4 flex flex-col gap-4">
-        <h2 className="text-4xl font-bold">$12,943.00</h2>
+        <FinancialInsights />
         <RecentTransactions />
       </main>
     </div>
