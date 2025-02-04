@@ -12,7 +12,7 @@ const Transaction: React.FC<ITransaction> = ({ date, title, amount, type }) => {
   return (
     <li className="flex flex-row justify-between items-center">
       <div className="flex items-center gap-3 xs:gap-4">
-        <div className="bg-ui-border rounded-lg p-2 xs:p-3">
+        <div className="bg-ui-border rounded-xl p-2 xs:p-3">
           <Arrow
             className={cn(
               "w-5 h-5 xs:w-auto xs:h-auto",
@@ -64,7 +64,7 @@ export const RecentTransactions = () => {
   return (
     <div className="flex flex-col gap-6">
       <ul className="flex flex-col gap-4">
-        <h3>Recent Transactions</h3>
+        <h3 className="text-lg font-bold">Recent Transactions</h3>
 
         {mockData.map((data) => (
           <Transaction
@@ -77,8 +77,8 @@ export const RecentTransactions = () => {
         ))}
       </ul>
 
-      <button className="text-ui-text bg-ui-border text-md font-bold">
-        View All
+      <button className="text-ui-text bg-ui-border text-sm xs:text-md font-bold">
+        Ver todas as transações
       </button>
     </div>
   );
