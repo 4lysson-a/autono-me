@@ -43,19 +43,19 @@ const mockData: ITransaction[] = [
   },
   {
     date: "Yesterday",
-    title: "Payment from Jane Doe",
+    title: "Payment from Jane",
     amount: "$1,000.00",
     type: "expense",
   },
   {
     date: "Jan 2",
-    title: "Payment from Jane Doe",
+    title: "Payment from Doe",
     amount: "$1,000.00",
     type: "income",
   },
   {
     date: "Jan 1",
-    title: "Payment from Jane Doe",
+    title: "Payment from John",
     amount: "$1,000.00",
     type: "expense",
   },
