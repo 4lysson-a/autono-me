@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { FinancialInsights } from "./sections/financial-insights";
 import { RecentTransactions } from "./sections/recent-transactions";
+import { TransactionProvider } from "@/context/transaction";
 
 export const Home = () => {
   const { user } = useAuth0();
@@ -15,8 +16,10 @@ export const Home = () => {
       </header>
 
       <main className="p-4 flex flex-col gap-4">
-        <FinancialInsights />
-        <RecentTransactions />
+        <TransactionProvider>
+          <FinancialInsights />
+          <RecentTransactions />
+        </TransactionProvider>
       </main>
     </div>
   );

@@ -8,15 +8,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
-const chartData = [
-  { month: "Janeiro", income: 186, outcome: 80 },
-  { month: "Fevereiro", income: 305, outcome: 200 },
-  { month: "Março", income: 237, outcome: 120 },
-  { month: "Abril", income: 73, outcome: 190 },
-  { month: "Maio", income: 209, outcome: 130 },
-  { month: "Junho", income: 214, outcome: 140 },
-];
+import { useTransaction } from "@/context/transaction";
+import { cn } from "@/lib/utils";
 
 const chartConfig = {
   income: {
@@ -30,8 +23,32 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const Chart = () => {
+  const { transactions } = useTransaction();
+
+  const getChartData = () => {
+    if (!transactions || transactions.length === 0) {
+      return [];
+    }
+
+    const data = transactions.map((transaction) => {
+      return {
+        month: transaction.date,
+        income: transaction.type === "income" ? transaction.amount : 0,
+        outcome: transaction.type === "expense" ? transaction.amount : 0,
+      };
+    });
+
+    console.log(data);
+
+    return data;
+  };
+
+  const chartData = getChartData();
+
+  console.log(chartData);
+
   return (
-    <ChartContainer config={chartConfig}>
+    <ChartContainer key={transactions?.length} config={chartConfig}>
       <AreaChart
         accessibilityLayer
         data={chartData}
@@ -99,6 +116,74 @@ const Chart = () => {
   );
 };
 
+const TotalValue = () => {
+  const { transactions } = useTransaction();
+
+  const total = transactions.reduce((acc, transaction) => {
+    return transaction.type === "income"
+      ? acc + parseFloat(transaction.amount)
+      : acc - parseFloat(transaction.amount);
+  }, 0);
+
+  const formatTotal = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(total);
+
+  return <h2 className="text-4xl font-bold">{formatTotal}</h2>;
+};
+
+const Peercents = () => {
+  const { transactions } = useTransaction();
+
+  const calculatePercentageChange = () => {
+    if (!transactions || transactions.length === 0) {
+      return 0;
+    }
+
+    const last30DaysTransactions = transactions.filter((transaction) => {
+      const transactionDate = new Date(transaction.date);
+      const today = new Date();
+      const diffTime = Math.abs(today.getTime() - transactionDate.getTime());
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays <= 30;
+    });
+
+    const totalIncome = last30DaysTransactions
+      .filter((transaction) => transaction.type === "income")
+      .reduce((acc, transaction) => acc + parseFloat(transaction.amount), 0);
+
+    const totalOutcome = last30DaysTransactions
+      .filter((transaction) => transaction.type === "expense")
+      .reduce((acc, transaction) => acc + parseFloat(transaction.amount), 0);
+
+    const netChange = totalIncome - totalOutcome;
+    const percentageChange = (netChange / totalOutcome) * 100;
+
+    return percentageChange.toFixed(2);
+  };
+
+  const percentageChange = calculatePercentageChange();
+
+  const isNegative = Boolean(parseFloat(percentageChange || "0") < 0);
+
+  return (
+    <p className="text-xs text-ui-text-foreground">
+      Last 30 days{" "}
+      <span
+        className={cn(
+          "text-ui-highlight font-semibold",
+          isNegative && "text-red-500"
+        )}
+      >
+        {parseFloat(percentageChange || "0") > 0
+          ? `+${percentageChange}%`
+          : `${percentageChange}%`}
+      </span>
+    </p>
+  );
+};
+
 export const FinancialInsights = () => {
   return (
     <div className="h-full flex flex-col gap-3">
@@ -106,11 +191,8 @@ export const FinancialInsights = () => {
 
       <div className="flex flex-col gap-1">
         <p>Account Balance</p>
-        <h2 className="text-4xl font-bold">$12,943.00</h2>
-        <p className="text-xs text-ui-text-foreground">
-          Last 30 days{" "}
-          <span className="text-ui-highlight font-semibold">+60%</span>
-        </p>
+        <TotalValue />
+        <Peercents />
       </div>
 
       <Chart />

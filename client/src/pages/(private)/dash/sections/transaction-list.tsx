@@ -9,22 +9,31 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useTransaction } from "@/context/transaction";
 import { Filter } from "lucide-react";
 
-const Transaction = () => {
+type Props = {
+  date: string;
+  type: string;
+  value: string;
+};
+
+const Transaction = ({ date, value, type }: Props) => {
   return (
     <div className="flex items-center w-full justify-between">
       <div>
-        <p>Jun 15, 2022</p>
-        <p className="text-ui-text-foreground">$ 2,000</p>
+        <p>{date}</p>
+        <p className="text-ui-text-foreground">{value}</p>
       </div>
 
-      <p className="font-bold">Deposit</p>
+      <p className="font-bold">{type}</p>
     </div>
   );
 };
 
 export function TransactionList() {
+  const { transactions } = useTransaction();
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -42,17 +51,14 @@ export function TransactionList() {
         </DrawerHeader>
 
         <div className="mx-auto w-full max-w-sm p-4 flex flex-col gap-6 overflow-y-auto pb-[100px]">
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
-          <Transaction />
+          {transactions.map((data, i) => (
+            <Transaction
+              key={i}
+              date={data.date}
+              type={data.type}
+              value={data.amount}
+            />
+          ))}
         </div>
       </DrawerContent>
     </Drawer>

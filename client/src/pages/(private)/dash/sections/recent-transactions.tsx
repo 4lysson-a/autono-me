@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { TransactionList } from "./transaction-list";
 import { ArrowDown as Arrow } from "lucide-react";
+import { useTransaction } from "@/context/transaction";
+import { TransactionInput } from "./transaction-list/input";
 
 type ITransaction = {
   date: string;
@@ -13,7 +15,13 @@ const Transaction: React.FC<ITransaction> = ({ date, title, amount, type }) => {
   return (
     <li className="flex flex-row justify-between items-center">
       <div className="flex items-center gap-3 xs:gap-4">
-        <div className="bg-ui-border rounded-xl p-2 xs:p-3">
+        <div
+          className={cn(
+            "bg-ui-border rounded-xl p-2 xs:p-3",
+            type === "expense" && "bg-red-400 text-white",
+            type === "income" && "bg-green-400 text-white"
+          )}
+        >
           <Arrow
             className={cn(
               "w-5 h-5 xs:w-auto xs:h-auto",
@@ -34,33 +42,6 @@ const Transaction: React.FC<ITransaction> = ({ date, title, amount, type }) => {
   );
 };
 
-const mockData: ITransaction[] = [
-  {
-    date: "Today",
-    title: "Payment from John Doe",
-    amount: "$1,000.00",
-    type: "income",
-  },
-  {
-    date: "Yesterday",
-    title: "Payment from Jane",
-    amount: "$1,000.00",
-    type: "expense",
-  },
-  {
-    date: "Jan 2",
-    title: "Payment from Doe",
-    amount: "$1,000.00",
-    type: "income",
-  },
-  {
-    date: "Jan 1",
-    title: "Payment from John",
-    amount: "$1,000.00",
-    type: "expense",
-  },
-];
-
 const Shadow = () => {
   return (
     <div
@@ -74,24 +55,27 @@ const Shadow = () => {
 };
 
 export const RecentTransactions = () => {
+  const { transactions } = useTransaction();
+
   return (
     <div className="flex flex-col gap-6">
       <ul className="flex flex-col gap-4 relative">
         <h3 className="text-lg font-bold">Recent Transactions</h3>
 
-        {mockData.map((data) => (
+        {transactions.map((data, index) => (
           <Transaction
             date={data.date}
             type={data.type}
-            key={data.title}
-            title={data.title}
+            key={index}
+            title={data.description}
             amount={data.amount}
           />
         ))}
-        <Shadow />
+        {transactions.length > 5 && <Shadow />}
       </ul>
 
       <TransactionList />
+      <TransactionInput />
     </div>
   );
 };
